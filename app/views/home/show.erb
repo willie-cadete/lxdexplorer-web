@@ -1,0 +1,27 @@
+<h1 class="center">Containers List</h1>
+<pre><%= @file %></pre>
+      <table class="centered responsive-table highlight">
+        <thead>
+          <tr>
+              <th>Name</th>
+              <th>Status</th>
+              <th>IP</th>
+              <th>OS</th>
+              <th>Version</th>
+              <th>ImageID</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% @containers.each do |container| %>
+          <tr>
+            <td><%= container['name'] %></td>
+            <td><%= container['status'] %></td>
+            <td><%= container['ip'] %></td>
+            <td><%= container['os'] %></td>
+            <td><%= container['version'] %></td>
+            <td><%= container['imageid'] %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
