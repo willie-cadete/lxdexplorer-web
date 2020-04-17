@@ -5,11 +5,11 @@ class RedisModel
 
   def self.get_containers
     list = []
-    @redis.keys('c:*').each do |container|
+    @redis.keys('lxd:*').each do |container|
       data = Hash.new
       db = @redis.hgetall(container)
-      data['host'] = db['host']
-      data['name'] = container.split("c:")[1]
+      data['host'] = container.split(":")[1]
+      data['name'] = container.split(":")[2]
       data['status'] = JSON.parse(db['state'])['status']
       begin
         data['ip'] = JSON.parse(db['state'])['network']['eth0']['addresses'][0]['address']
@@ -21,7 +21,7 @@ class RedisModel
       data['imageid'] = JSON.parse(db['info'])['config']['volatile.base_image'][0..5]
       list.push(data)
     end
-    list
+    list.sort_by { |hsh| hsh['host'] }
   end
 
 end
