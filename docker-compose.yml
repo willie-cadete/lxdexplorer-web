@@ -2,6 +2,7 @@ version: '3'
 services:
   web:
     build: .
+    image: williecadete/lxd-explorer-web:latest
     command: "rackup -o 0.0.0.0 -p 3000 config.ru"
     volumes:
       - .:/myapp
@@ -14,7 +15,7 @@ services:
       - REDIS_PORT=6379
 
   worker:
-    image: worker_worker:latest
+    image: williecadete/lxd-explorer-worker:latest
     environment: 
       - REDIS_HOST=redis
       - REDIS_PORT=6379
