@@ -16,8 +16,8 @@ class RedisModel
       rescue
         data['ip'] = 'none'
       end
-      data['os'] = 'none'
-      data['version'] = 'none'
+      data['os'] = JSON.parse(db['info'])['config']['image.os']
+      data['version'] = JSON.parse(db['info'])['config']['image.release']
       data['imageid'] = JSON.parse(db['info'])['config']['volatile.base_image'][0..5]
       list.push(data)
     end
