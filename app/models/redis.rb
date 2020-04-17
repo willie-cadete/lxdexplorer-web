@@ -11,7 +11,11 @@ class RedisModel
       data['host'] = db['host']
       data['name'] = container.split("c:")[1]
       data['status'] = JSON.parse(db['state'])['status']
-      data['ip'] = JSON.parse(db['state'])['network']['eth0']['addresses'][0]['address']
+      begin
+        data['ip'] = JSON.parse(db['state'])['network']['eth0']['addresses'][0]['address']
+      rescue
+        data['ip'] = 'none'
+      end
       data['os'] = 'none'
       data['version'] = 'none'
       data['imageid'] = JSON.parse(db['info'])['config']['volatile.base_image'][0..5]
