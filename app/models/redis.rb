@@ -8,6 +8,7 @@ class RedisModel
     @redis.keys('c:*').each do |container|
       data = Hash.new
       db = @redis.hgetall(container)
+      data['host'] = db['host']
       data['name'] = container.split("c:")[1]
       data['status'] = JSON.parse(db['state'])['status']
       data['ip'] = JSON.parse(db['state'])['network']['eth0']['addresses'][0]['address']
