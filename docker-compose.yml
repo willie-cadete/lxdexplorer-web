@@ -21,7 +21,7 @@ services:
       - REDIS_PORT=6379
       - LOG_LEVEL=info
       - INTERVAL=60
-      - LXD_HOSTS=wcl-lxd-fake-api.herokuapp.com:443
+      - LXD_HOSTS=https://wcl-lxd-fake-api.herokuapp.com:443
 
   redis:
     image: redis:alpine
