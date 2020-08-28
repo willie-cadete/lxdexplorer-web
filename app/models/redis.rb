@@ -13,6 +13,8 @@ class RedisModel
       data['status'] = JSON.parse(db['state'])['status']
       begin
         data['ip'] = JSON.parse(db['state'])['network']['eth0']['addresses'][0]['address']
+        data['netmask'] = JSON.parse(db['state'])['network']['eth0']['addresses'][0]['netmask']
+        data['cidr'] = data['ip'] + '/' + data['netmask']
       rescue
         data['ip'] = 'none'
       end
