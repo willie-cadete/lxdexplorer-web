@@ -22,9 +22,9 @@ class RedisModel
       end
       data['os'] = JSON.parse(db['info'])['config']['image.os']
       data['version'] = JSON.parse(db['info'])['config']['image.release']
-      if data['os'] or data['version'] == nil
-        data['os'] = none
-        data['version'] = none
+      if data['os'] == nil or data['version'] == nil
+        data['os'] = 'none'
+        data['version'] = 'none'
       end
       data['imageid'] = JSON.parse(db['info'])['config']['volatile.base_image'][0..5]
       list.push(data)
