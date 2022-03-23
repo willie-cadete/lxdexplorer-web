@@ -26,8 +26,8 @@ class RedisModel
         data['os'] = 'none'
         data['version'] = 'none'
       end
-      data['os'].capitalize!
-      data['version'].capitalize!
+      data['os'].downcase!
+      data['version'].downcase!
       data['imageid'] = JSON.parse(db['info'])['config']['volatile.base_image'][0..5]
       list.push(data)
     end
