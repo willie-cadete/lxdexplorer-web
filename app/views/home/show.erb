@@ -2,6 +2,7 @@
       <table class="centered responsive-table highlight">
         <thead>
           <tr>
+              <th>#</th>
               <th>Host</th>
               <th>Name</th>
               <th>Status</th>
@@ -13,8 +14,9 @@
         </thead>
 
         <tbody>
-        <% @containers.each do |container| %>
+        <% @containers.each_with_index do |container, index| %>
           <tr>
+            <td><%= index + 1 %></td>
             <td><%= container['host'] %></td>
             <td><%= container['name'] %></td>
             <td><%= container['status'] %></td>
