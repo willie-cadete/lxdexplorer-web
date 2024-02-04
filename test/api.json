@@ -1,0 +1,22 @@
+[
+    {
+        "host": "host1.example.com",
+        "name": "container1",
+        "status": "running",
+        "ip": "192.168.0.30",
+        "cidr": "192.168.0.0/24",
+        "os": "Ubuntu",
+        "version": "20.04",
+        "imageid": "345abc"
+    },
+    {
+        "host": "host1.example.com",
+        "name": "container2",
+        "status": "stopped",
+        "ip": "none",
+        "cidr": "none",
+        "os": "Ubuntu",
+        "version": "20.04",
+        "imageid": "abc678"
+    }
+]
