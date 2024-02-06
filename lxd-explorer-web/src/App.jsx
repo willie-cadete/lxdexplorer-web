@@ -1,19 +1,22 @@
 import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
-import Table from './components/Table';
+import Home from './components/Home';
 import Footer from './components/Footer';
-import { fetchContainers } from './api';
 
-const containers = await fetchContainers();
 
 function App() {
 
   return (
-    <>
-      <Header />
-      <Table containers={containers} />
-      <Footer />
-    </>
+    <div>
+      <BrowserRouter>
+        <Header/>
+          <Routes>
+            <Route path="/" element={<Home />} />
+          </Routes>
+        <Footer/>
+      </BrowserRouter>
+    </div>
   )
 }
 
