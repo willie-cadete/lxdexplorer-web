@@ -1,40 +1,51 @@
 import React from 'react';
+import Box from '@mui/material/Box';
+import { DataGrid } from '@mui/x-data-grid';
+
+const columns = [
+    { field: 'id', headerName: '#' ,flex: 1, sortable: false, filterable: false},
+    { field: 'name', headerName: 'Name',flex: 1,},
+    { field: 'host', headerName: 'Host',flex: 1, groupable: true},
+    { field: 'status', headerName: 'Status',flex: 1,},
+    { field: 'ip', headerName: 'IP',flex: 1,},
+    { field: 'cidr', headerName: 'CIDR',flex: 1,},
+    { field: 'os', headerName: 'OS',flex: 1,},
+    { field: 'version', headerName: 'Version',flex: 1,},
+    { field: 'imageid', headerName: 'Image ID',flex: 1,},
+];
+
+
+
 
 const Table = ({ containers }) => {
+    console.log(containers)
+
+    const rows = containers.map((container, index) => {
+        return {
+            id: index + 1,
+            name: container.name,
+            host: container.host,
+            status: container.status,
+            ip: container.ip,
+            cidr: container.cidr,
+            os: container.os,
+            version: container.version,
+            imageid: container.imageid,
+        }
+    });
+
     return (
-        <div>
-            <table className="centered responsive-table highlight">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Host</th>
-                        <th>Name</th>
-                        <th>Status</th>
-                        <th>IP</th>
-                        <th>CIDR</th>
-                        <th>OS</th>
-                        <th>Version</th>
-                        <th>Image ID</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {containers.map((container, index) => (
-                        <tr key={index}>
-                            <td>{index + 1}</td>
-                            <td>{container.host}</td>
-                            <td>{container.name}</td>
-                            <td>{container.status}</td>
-                            <td>{container.ip}</td>
-                            <td>{container.cidr}</td>
-                            <td>{container.os}</td>
-                            <td>{container.version}</td>
-                            <td>{container.imageid}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-        </div >
-    )
+        <Box sx={{ height: 400, width: '100%' }}>
+            <DataGrid
+                rows={rows}
+                columns={columns}
+                autoHeight
+                // pageSize={5}
+                // rowsPerPageOptions={[5]}
+                disableColumnSelector
+            />
+        </Box>
+    );
 }
 
-export default Table
+export default Table;
