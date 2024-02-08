@@ -36,8 +36,6 @@ const Table = ({ containers }) => {
                 rows={rows}
                 columns={columns}
                 autoHeight
-                // pageSize={5}
-                // rowsPerPageOptions={[5]}
                 disableColumnSelector
             />
         </Box>
