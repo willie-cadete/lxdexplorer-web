@@ -6,7 +6,7 @@ const columns = [
     { field: 'id', headerName: '#' ,flex: 1, sortable: false, filterable: false},
     { field: 'name', headerName: 'Name',flex: 1,},
     { field: 'host', headerName: 'Host',flex: 1, groupable: true},
-    { field: 'status', headerName: 'Status',flex: 1,},
+    { field: 'status', headerName: 'Status',flex: 1, type: "singleSelect", valueOptions: ["Running", "Stopped"]},
     { field: 'ip', headerName: 'IP',flex: 1,},
     { field: 'cidr', headerName: 'CIDR',flex: 1,},
     { field: 'os', headerName: 'OS',flex: 1,},
@@ -14,11 +14,7 @@ const columns = [
     { field: 'imageid', headerName: 'Image ID',flex: 1,},
 ];
 
-
-
-
 const Table = ({ containers }) => {
-    console.log(containers)
 
     const rows = containers.map((container, index) => {
         return {
