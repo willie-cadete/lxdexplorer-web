@@ -1,0 +1,30 @@
+<h1 class="center">Containers List</h1>
+      <table class="centered responsive-table highlight">
+        <thead>
+          <tr>
+              <th>#</th>
+              <th>Host</th>
+              <th>Name</th>
+              <th>Status</th>
+              <th>CIDR</th>
+              <th>OS</th>
+              <th>Version</th>
+              <th>ImageID</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% @containers.each_with_index do |container, index| %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= container['host'] %></td>
+            <td><%= container['name'] %></td>
+            <td><%= container['status'] %></td>
+            <td><%= container['cidr'] %></td>
+            <td><%= container['os'] %></td>
+            <td><%= container['version'] %></td>
+            <td><%= container['imageid'] %></td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
