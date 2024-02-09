@@ -5,6 +5,12 @@ class Application < Sinatra::Base
   set :bind, '0.0.0.0'
   set :root, APP_ROOT
   set :views, File.join(APP_ROOT, "app", "views")
+
+  configure do
+    enable :cross_origin
+  end  before do
+    response.headers['Access-Control-Allow-Origin'] = '*'
+  end
 end
 
 class RedisCache
