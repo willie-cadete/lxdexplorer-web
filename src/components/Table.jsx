@@ -20,12 +20,12 @@ const Table = ({ containers }) => {
         return {
             id: index + 1,
             name: container.name,
-            host: container.host,
+            host: container.hostnode,
             status: container.status,
-            ip: container.ip,
-            cidr: container.cidr,
-            os: container.os,
-            version: container.version,
+            ip: container.network.ips,
+            cidr: container.network.cidr,
+            os: container.os.distribution,
+            version: container.os.version,
             imageid: container.imageid,
         }
     });

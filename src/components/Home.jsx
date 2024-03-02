@@ -7,7 +7,7 @@ const containers = await fetchContainers();
 const Home = () => {
   return (
     <>
-      <Table containers={containers} />
+      <Table containers={containers.message} />
     </>
   )
 }
