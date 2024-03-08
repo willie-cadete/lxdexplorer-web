@@ -1,5 +1,7 @@
 FROM node:alpine as builder
 
+ARG VITE_API_URL
+
 # Set the working directory
 
 WORKDIR /app
