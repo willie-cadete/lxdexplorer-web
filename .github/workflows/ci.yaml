@@ -25,7 +25,6 @@ jobs:
             type=ref,event=branch
             type=ref,event=pr
             type=sha
-            type=latest
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3
 
@@ -44,4 +43,4 @@ jobs:
           VITE_API_URL: ${{ secrets.VITE_API_URL }}
         with:
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          tags: ${{ steps.meta.outputs.tags }},latest
