@@ -39,8 +39,10 @@ jobs:
 
       - name: Build and push
         uses: docker/build-push-action@v5
-        env:
-          VITE_API_URL: ${{ secrets.VITE_API_URL }}
         with:
           push: true
-          tags: ${{ steps.meta.outputs.tags }},latest
+          tags: |
+            ${{ steps.meta.outputs.tags }}
+            williecadete/lxdexplorer-web:latest
+          build-args: |
+            VITE_API_URL=${{ secrets.VITE_API_URL }}
