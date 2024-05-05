@@ -46,3 +46,17 @@ jobs:
             williecadete/lxdexplorer-web:latest
           build-args: |
             VITE_API_URL=${{ secrets.VITE_API_URL }}
+
+      - name: Checkout Infra code
+        uses: actions/checkout@v4
+        with:
+          repository: willie-cadete/homelab
+          token: ${{ secrets.GH_PAT }}
+          path: infra
+
+      - name: Update Docker Image
+        run: |
+          echo "image: williecadete/lxdexplorer-web:${{ steps.meta.outputs.tags }}"
+          sed -i "s|image: williecadete/lxdexplorer-web:.*|image: williecadete/lxdexplorer-web:${{ steps.meta.outputs.tags }}|" kubernetes/manifests/lxdexplorer-web/deployment.yml
+          git commit -m "Update lxdexplorer-web image to ${{ steps.meta.outputs.tags }}"
+          git push
