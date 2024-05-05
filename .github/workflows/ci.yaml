@@ -57,6 +57,6 @@ jobs:
       - name: Update Docker Image
         run: |
           echo "image: williecadete/lxdexplorer-web:${{ steps.meta.outputs.tags }}"
-          sed -i "s|image: williecadete/lxdexplorer-web:.*|image: williecadete/lxdexplorer-web:${{ steps.meta.outputs.tags }}|" kubernetes/manifests/lxdexplorer-web/deployment.yml
+          sed -i '' -e "s|image: williecadete/lxdexplorer-web:.*|image: williecadete/lxdexplorer-web:${{ steps.meta.outputs.tags }}|" kubernetes/manifests/lxdexplorer-web/deployment.yml
           git commit -m "Update lxdexplorer-web image to ${{ steps.meta.outputs.tags }}"
           git push
