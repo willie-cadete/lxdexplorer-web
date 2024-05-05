@@ -56,7 +56,7 @@ jobs:
 
       - name: Update Docker Image
         run: |
-          echo "image: williecadete/lxdexplorer-web:${{ steps.meta.outputs.tags.sha }}
-          sed -i "s|image: williecadete/lxdexplorer-web:.*|image: williecadete/lxdexplorer-web:${{ steps.meta.outputs.tags.sha }}|" kubernetes/manifests/lxdexplorer-web/deployment.yml
-          git commit -m "Update lxdexplorer-web image to ${{ steps.meta.outputs.tags.sha }}"
+          echo "image: williecadete/lxdexplorer-web:${ GITHUB_SHA }"
+          sed -i "s|image: williecadete/lxdexplorer-web:.*|image: williecadete/lxdexplorer-web:${ GITHUB_SHA }|" kubernetes/manifests/lxdexplorer-web/deployment.yml
+          git commit -m "Update lxdexplorer-web image to ${ GITHUB_SHA }"
           git push
