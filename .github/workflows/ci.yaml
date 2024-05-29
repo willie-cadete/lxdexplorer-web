@@ -4,59 +4,38 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
+    tags:
+      - 'v*' # Push events to matching v*, i.e. v1.0, v20.15.10
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
       - name: Docker meta
         id: meta
         uses: docker/metadata-action@v5
         with:
-          # list of Docker images to use as base name for tags
-          images: |
-            williecadete/lxdexplorer-web
-          # generate Docker tags based on the following events/attributes
+          images: ${{ secrets.DOCKERHUB_USERNAME }}/lxdexplorer-web
           tags: |
-            type=ref,event=branch
-            type=ref,event=pr
-            type=sha
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
+            type=edge
+            type=semver,pattern={{version}}
 
       - name: Login to Docker Hub
         uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
 
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
+          context: .
           push: true
-          tags: |
-            ${{ steps.meta.outputs.tags }}
-            williecadete/lxdexplorer-web:latest
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
           build-args: |
             VITE_API_URL=${{ secrets.VITE_API_URL }}
-
-      - name: Checkout Infra code
-        uses: actions/checkout@v4
-        with:
-          repository: willie-cadete/homelab
-          token: ${{ secrets.GH_PAT }}
-          path: infra
-
-      - name: Update Docker Image
-        run: |
-          echo "image: williecadete/lxdexplorer-web:${ GITHUB_SHA }"
-          sed -i "s|image: williecadete/lxdexplorer-web:.*|image: williecadete/lxdexplorer-web:${ GITHUB_SHA }|" kubernetes/manifests/lxdexplorer-web/deployment.yml
-          git commit -m "Update lxdexplorer-web image to ${ GITHUB_SHA }"
-          git push
