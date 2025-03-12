@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: lxdexplorer-web
+  description: Visualize all Linux Containers in the environment
+spec:
+  type: website
+  lifecycle: production
+  owner: willie-cadete
