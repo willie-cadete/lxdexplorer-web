@@ -3,7 +3,8 @@ kind: Component
 metadata:
   name: lxdexplorer-web
   description: Visualize all Linux Containers in the environment
+  annotations:
+    github.com/project-slug: willie-cadete/lxdexplorer-web
 spec:
   type: website
   lifecycle: production
-  owner: willie-cadete
